@@ -1,41 +1,51 @@
 class Solution {
 public:
+ 
+    // Now try the same question using DFS DCG Cycle Detection
+    bool dfs(vector<vector<int>>& graph, vector<int>&Vis, vector<int> &PathVis, int node)
+    {
+        Vis[node] = 1;
+
+        for(int i = 0 ; i < graph[node].size() ; i++ )
+        {
+            if(Vis[graph[node][i]] == 0)
+            {
+              if(dfs(graph,Vis,PathVis,graph[node][i]))
+              {
+                Vis[node] = 3;
+                return true;
+              }
+            }
+            else if(Vis[graph[node][i]] != 2)
+            {
+               Vis[node] = 3; 
+               return true;
+            }
+        }
+        Vis[node] = 2;
+        return false;
+    }
+
     vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
         int V = graph.size();
-        vector<vector<int>>incoming(V+1);
-        for(int i = 0 ; i < V ; i++)
-        {
-            for(int j = 0 ; j < graph[i].size() ; j++)
-            {
-                incoming[graph[i][j]].push_back(i);
-            }
-        }
-        vector<int>outDegree(V+1,0);
-        for(int i = 0 ; i < V ; i++ )
-        {
-            outDegree[i]+=graph[i].size(); // OutDegree's for every position are evaluated
-        }
-        queue<int>qst;
-        for(int i = 0 ; i < V ; i++ )
-        {
-            if(outDegree[i] == 0)
-            {
-                qst.push(i);
-            }
-        }
+        vector<int>Vis(V+1,0);
+        vector<int>PathVis(V+1,0);
+        // 0 => unvisited and 1 => visited
         vector<int>ans;
-        while(!qst.empty())
+        for(int i = 0 ; i < V ; i++ )
         {
-           int val = qst.front();
-           qst.pop();
-           ans.push_back(val);
-           for(int i = 0 ; i < incoming[val].size() ; i++ )
-           {
-             outDegree[incoming[val][i]]--;
-             if(outDegree[incoming[val][i]] == 0) qst.push(incoming[val][i]);
-           }
+            if(Vis[i] == 0)
+            {
+                dfs(graph,Vis,PathVis,i);
+            }
         }
-        sort(ans.begin(),ans.end());
+        for(int i = 0 ; i < V ; i++ )
+        {
+            if(Vis[i] == 2)
+            {
+                ans.push_back(i);
+            }
+        }
         return ans;
     }
 };
