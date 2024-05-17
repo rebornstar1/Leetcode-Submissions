@@ -11,36 +11,14 @@
  */
 class Solution {
 public:
-    void dfs(TreeNode* &root,int target)
-    { 
-        if(root == NULL)
-        {
-            return;
-        }  
-        dfs(root->left,target);
-        dfs(root->right,target);
-        if(root->left != NULL)
-        {
-           if(root->left->val == target && root->left->left == NULL && root->left->right == NULL)
-           {
-            root->left = NULL;
-           }
+    TreeNode* removeLeafNodes(TreeNode* root, int target) {
+        if(root->left != NULL){
+            root->left = removeLeafNodes(root->left,target);
         }
         if(root->right != NULL)
         {
-           if(root->right->val == target && root->right->left == NULL && root->right->right == NULL)
-           {
-            root->right = NULL;
-           }
+            root->right = removeLeafNodes(root->right,target);
         }
-    }
-
-    TreeNode* removeLeafNodes(TreeNode* root, int target) {
-        dfs(root,target);
-        if(root->val == target && root->left == NULL && root->right == NULL)
-        {
-            return NULL;
-        }
-        return root;
+        return (root->left == NULL && root->right == NULL && root->val == target)? NULL : root;
     }
 };
