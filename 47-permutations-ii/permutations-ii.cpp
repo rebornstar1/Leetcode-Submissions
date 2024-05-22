@@ -7,12 +7,15 @@ public:
             ans.insert(temp);
             return;
         }
+        map<int,int>mp;
         for(int i = 0 ; i < nums.size() ; i++ )
         {
-            if(visited[i] == 0)
+            // Here I Need To Make sure that Only Unique's Should be Passed
+            if(visited[i] == 0 && mp[nums[i]]==0)
             {
                visited[i] = 1;
                temp.push_back(nums[i]);
+               mp[nums[i]]++;
                Permutation(nums,ind+1,temp,ans,visited);
                visited[i] = 0;
                temp.pop_back();
@@ -34,3 +37,5 @@ public:
         return flex;
     }
 };
+
+// Now You need to Optimize This Code Right Now
