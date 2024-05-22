@@ -39,43 +39,32 @@ public:
         return true;
     }
 
-    void partition(string s,string p,int ind,vector<string>temp,set<vector<string>>&ans,int flag)
+    void partition(string s,string p,int ind,vector<string>temp,vector<vector<string>>&ans)
     {
         // p is a temporary String
         if(ind == s.size())
         {
-            if(checkEqual(s,temp))
-            {
-             ans.insert(temp);
-            }
-            return;
+            ans.push_back(temp);
         }
 
-        p+=s[ind];
-        if(checkPalindrome(p))
+        for(int i = ind ; i < s.size() ; i++)
         {
-            if(flag == 1)
+            p+=s[i];
+            if(checkPalindrome(p))
             {
-                temp.pop_back();
+              temp.push_back(p);
+              partition(s,"",i+1,temp,ans);
+              temp.pop_back();
             }
-            temp.push_back(p);
         }
-        partition(s,"",ind+1,temp,ans,0);
-        partition(s,p,ind+1,temp,ans,1);
         return;
     }
 
     vector<vector<string>> partition(string s) {
-        set<vector<string>>ans;
+        vector<vector<string>>ans;
         vector<string>temp;
         string p;
-        vector<vector<string>>haup;
-        int flag = 0;
-        partition(s,p,0,temp,ans,flag);
-        for(auto it : ans)
-        {
-            haup.push_back(it);
-        }
-        return haup;
+        partition(s,p,0,temp,ans);
+        return ans;
     }
 };
