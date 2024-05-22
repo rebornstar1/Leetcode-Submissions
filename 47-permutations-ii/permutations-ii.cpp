@@ -1,10 +1,10 @@
 class Solution {
 public:
-    void Permutation(vector<int>nums,int ind,vector<int>temp,set<vector<int>>&ans,vector<int>visited)
+    void Permutation(vector<int>nums,int ind,vector<int>temp,vector<vector<int>>&ans,vector<int>visited)
     {
         if(ind == nums.size())
         {
-            ans.insert(temp);
+            ans.push_back(temp);
             return;
         }
         map<int,int>mp;
@@ -24,17 +24,17 @@ public:
     }
 
     vector<vector<int>> permuteUnique(vector<int>& nums) {
-        set<vector<int>>ans;
+        vector<vector<int>>ans;
         vector<int>temp;
         vector<int>visited(nums.size()+1,0);
 
         Permutation(nums,0,temp,ans,visited);
-        vector<vector<int>>flex;
-        for(auto it : ans)
-        {
-            flex.push_back(it);
-        }
-        return flex;
+        // vector<vector<int>>flex;
+        // for(auto it : ans)
+        // {
+        //     flex.push_back(it);
+        // }
+        return ans;
     }
 };
 
