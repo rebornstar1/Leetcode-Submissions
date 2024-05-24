@@ -2,13 +2,13 @@ class Solution {
 public:
     int stoneGameVI(vector<int>& aliceValues, vector<int>& bobValues) {
         int n = aliceValues.size();
+        // Instead of Using Vector of Vector You can Declear the Custom Sorting Method
         vector<vector<int>>vt;
         for(int i = 0 ; i < n ; i++ )
         {
             vector<int>temp;
             temp.push_back(aliceValues[i]+bobValues[i]);
-            temp.push_back(aliceValues[i]);
-            temp.push_back(bobValues[i]);
+            temp.push_back(i);
             vt.push_back(temp);
         }
         sort(vt.begin(),vt.end());
@@ -18,12 +18,12 @@ public:
         {
             if(flag == 0)
             {
-                alice+=vt[i][1];
+                alice+=aliceValues[vt[i][1]];
                 flag = 1;
             }
             else
             {
-                bob+=vt[i][2];
+                bob+=bobValues[vt[i][1]];
                 flag = 0;
             }
         }
