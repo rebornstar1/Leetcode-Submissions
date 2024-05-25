@@ -8,6 +8,7 @@ public:
         vector<vector<int>>tp(n,vector<int>(m,INT_MAX));
         tp[0][0] = 0;
         priority_queue<vector<int>,vector<vector<int>>,greater<vector<int>>>qst;
+        // Using Priority Queue The Unnecessary Caluclations were removed
         qst.push({0,0,0});
 
         vector<pair<int,int>>flex;
@@ -21,6 +22,7 @@ public:
            int eff = qst.top()[0];
            int i = qst.top()[1];
            int j = qst.top()[2];
+           if(i == (n-1) && j == (m-1)) return tp[n-1][m-1];
            qst.pop();
 
            for(int k = 0 ; k < flex.size() ; k++ )
@@ -41,4 +43,4 @@ public:
     }
 };
 
-// Now Just Optimize This code
+// Optimize it more
