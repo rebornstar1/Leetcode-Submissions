@@ -7,7 +7,7 @@ public:
         // Initially all the efforts are set to zero
         vector<vector<int>>tp(n,vector<int>(m,INT_MAX));
         tp[0][0] = 0;
-        queue<vector<int>>qst;
+        priority_queue<vector<int>,vector<vector<int>>,greater<vector<int>>>qst;
         qst.push({0,0,0});
 
         vector<pair<int,int>>flex;
@@ -18,9 +18,9 @@ public:
 
         while(!qst.empty())
         {
-           int eff = qst.front()[0];
-           int i = qst.front()[1];
-           int j = qst.front()[2];
+           int eff = qst.top()[0];
+           int i = qst.top()[1];
+           int j = qst.top()[2];
            qst.pop();
 
            for(int k = 0 ; k < flex.size() ; k++ )
@@ -40,3 +40,5 @@ public:
         return tp[n-1][m-1];
     }
 };
+
+// Now Just Optimize This code
