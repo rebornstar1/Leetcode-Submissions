@@ -1,24 +1,38 @@
 class Solution {
 public:
-    int specialArray(vector<int>& nums) {
-        map<int,int>mp;
-        for(int i = 0 ; i <= 1000 ; i++ )
-        {
-            mp[i] = 0;
-        }
-
+    int func(vector<int>&nums,int m)
+    {
+        int cnt = 0 ;
         for(int i = 0 ; i < nums.size() ; i++ )
         {
-            mp[nums[i]]++;
-        }
-        for(int i = 999 ; i >= 0 ; i-- )
-        {
-            mp[i]+=mp[i+1];
-            if(mp[i] == i)
+            if(nums[i] >= m )
             {
-                return i;
+                cnt++;
             }
         }
+        return cnt;
+    }
+
+    int specialArray(vector<int>& nums) {
+        // Binary Search for the Optimal Solution 
+        int s = 0, e = 1000, m ;
+        while(s <= e)
+        {
+            m = (s+e)/2;
+            if(func(nums,m) > m)
+            {
+               s = m+1;
+            }
+            else if(func(nums,m) == m)
+            {
+                return m;
+            }
+            else
+            {
+              e = m-1;
+            }
+        }
+        cout<<s<<" "<<m<<" "<<e<<endl;
         return -1;
     }
 };
