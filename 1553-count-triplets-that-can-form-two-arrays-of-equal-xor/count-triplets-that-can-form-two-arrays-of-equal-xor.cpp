@@ -11,16 +11,14 @@ public:
         int cnt = 0;
         for(int i = 0 ; i < (n-1) ; i++ )
         {
-            for(int j = (i+1) ; j < n ; j++ )
-            {
-                for(int k = j ; k < n ; k++ )
+                for(int k = i+1 ; k < n ; k++ )
                 {
                     // This will be the O(N*N*N) Time Complexity Function
                     if( i == 0)
                     {
                         if(arr[k] == 0)
                         {
-                            cnt++;
+                            cnt+=(k-i);
                         }
                     } 
                     else
@@ -28,6 +26,7 @@ public:
                         if(arr[k] == arr[i-1])
                         {
                             cnt++;
+                            cnt+=(k-i-1);
                         }
                     }
                     // if(arr[k] == (i>0)?arr[i-1]:0)
@@ -35,8 +34,9 @@ public:
                     //     cnt++;
                     // }
                 }
-            }
         }
         return cnt;
     }
 };
+
+// The Followup question is that you need to solve in as less TC possible
