@@ -38,12 +38,6 @@ public:
             a++;
        }
 
-       for(int i = 0 ; i < dist.size() ; i++ )
-       {
-        cout<<dist[i]<<" "<<i<<endl;
-       }
-       cout<<dst<<endl;
-
        if(dist[dst] == INT_MAX) return -1;
        return dist[dst];
     }
