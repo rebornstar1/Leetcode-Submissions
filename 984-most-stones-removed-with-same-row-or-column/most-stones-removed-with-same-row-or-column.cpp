@@ -8,20 +8,21 @@ public:
 
     void fUnion(vector<int>&parent, vector<int>&size, int x , int  y)
     {
-        int px = findUpar(parent,x);
-        int py = findUpar(parent,y);
-        if(px == py) return;
+        parent[findUpar(parent,x)] = parent[findUpar(parent,y)];
+        // int px = findUpar(parent,x);
+        // int py = findUpar(parent,y);
+        // if(px == py) return;
 
-        if(size[px] < size[py])
-        {
-           parent[px] = py;
-           size[py] += size[px];
-        }
-        else
-        {
-           parent[py] = px;
-           size[px] += size[py];
-        }
+        // if(size[px] < size[py])
+        // {
+        //    parent[px] = py;
+        //    size[py] += size[px];
+        // }
+        // else
+        // {
+        //    parent[py] = px;
+        //    size[px] += size[py];
+        // }
     }
 
     int removeStones(vector<vector<int>>& stones) {
