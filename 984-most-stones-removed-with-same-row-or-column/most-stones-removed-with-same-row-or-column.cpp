@@ -29,6 +29,13 @@ public:
 
         int V = stones.size(); // The Total Number of Vertices
 
+        vector<int>parent(V+1,0);
+        vector<int>size(V+1,1);
+        for(int i = 0 ; i <= V ; i++ )
+        {
+            parent[i] = i; // Same Assinged Accordingly
+        }
+
         vector<vector<int>>adj(V+1);
         for(int i = 0 ; i < stones.size() ; i++ )
         {
@@ -40,27 +47,21 @@ public:
                     // If we aren't comparing it with himself
                     if(stones[i][0] == stones[j][0] || stones[i][1] == stones[j][1])
                     {
-                        adj[i+1].push_back(j+1);
+                        fUnion(parent,size,i+1,j+1);
                     }
                 }
             }
         }
 
-        // Created The Adjacency List Successfully 
-        vector<int>parent(V+1,0);
-        vector<int>size(V+1,1);
-        for(int i = 0 ; i <= V ; i++ )
-        {
-            parent[i] = i; // Same Assinged Accordingly
-        }
+        // Created The Adjacency List Successfully
 
-        for(int i = 1 ; i <= V ; i++ )
-        {
-            for(int j = 0 ; j < adj[i].size() ; j++ )
-            {
-               fUnion(parent,size,i,adj[i][j]);
-            }
-        }
+        // for(int i = 1 ; i <= V ; i++ )
+        // {
+        //     for(int j = 0 ; j < adj[i].size() ; j++ )
+        //     {
+        //        fUnion(parent,size,i,adj[i][j]);
+        //     }
+        // }
 
         int cnt = 0;
         for(int i = 1 ; i <= V ; i++ )
@@ -74,3 +75,5 @@ public:
         return stones.size()-cnt;      
     }
 };
+
+//  Check Whether We can optimse this code more ?
