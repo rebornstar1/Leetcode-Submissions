@@ -45,7 +45,7 @@ public:
     vector<vector<string>> accountsMerge(vector<vector<string>>& accounts) {
 
         // First Task Is to find the edges
-        vector<vector<int>>edges;
+        set<vector<int>>edge;
         int n = accounts.size();
 
         // As of Now Everything Else Seems Right But I need to make changes in the way of evaluation of edges
@@ -57,6 +57,7 @@ public:
                 mp[{accounts[i][j],accounts[i][0]}].push_back(i+1);
             }
         }
+        // O(N*N);
 
         // Now All In one types are the connected Component Itself'
         for(auto it : mp)
@@ -65,40 +66,17 @@ public:
             vector<int>jump = it.second;
             for(int i = 0 ; i < (jump.size()-1) ; i++)
             {
-                edges.push_back({jump[i],jump[i+1]});
+                if(jump[i] != jump[i+1])
+                {
+                edge.insert({jump[i],jump[i+1]});
+                }
             }
         }
 
-        // for(int i = 0 ; i < (n-1) ; i++ )
-        // {
-        //     for(int j = (i+1) ; j < n ; j++ )
-        //     {
-        //         if((i == j) || (accounts[i][0] != accounts[j][0])) continue;
-        //         int flag = 0;
-        //         set<string>qst;
-        //         for(int k = 1 ; k < accounts[i].size() ; k++ )
-        //         {
-        //             qst.insert(accounts[i][k]);
-        //         }
-        //         for(int k = 1 ; k < accounts[j].size() ; k++ )
-        //         {
-        //             if(qst.find(accounts[j][k]) != qst.end())
-        //             {
-        //                 flag = 1;
-        //             }
-        //         }
-        //         if(flag == 1)
-        //         {
-        //             edges.push_back({i+1,j+1});
-        //         }
-        //     }
-        // }
-
-        // O(1000*1000*1000*NlogN)
-
-        for(auto it : edges)
+        vector<vector<int>>edges;
+        for(auto it : edge)
         {
-            cout<<it[0]<<" "<<it[1]<<endl;
+            edges.push_back(it);
         }
 
         map<int,set<string>>tp;
@@ -145,4 +123,4 @@ public:
     }
 };
 
-// Try to optimse this code
+// Try to bring it's Time Complexity Below 20/30 Ms
