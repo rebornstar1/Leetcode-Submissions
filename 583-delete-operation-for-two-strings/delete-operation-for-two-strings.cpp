@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int cntSteps(string word1,string word2,int i,int j,vector<vector<int>>&dp)
+    int cntSteps(string &word1,string &word2,int i,int j,vector<vector<int>>&dp)
     {
 
         if(i == word1.size() || j == word2.size())
