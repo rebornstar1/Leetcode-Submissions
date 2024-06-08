@@ -33,48 +33,37 @@ public:
         int n = word1.size();
         int m = word2.size();
 
-        vector<vector<int>>dp(n+1,vector<int>(m+1,0));
+        vector<int>pres(m+2,0);
+        vector<int>nxt(m+2,0);
+        // vector<vector<int>>dp(n+1,vector<int>(m+1,0));
 
         // Base Case
-        for(int i = 0 ; i < n ; i++ ) dp[i][word2.size()] = (word1.size()-i);
-        for(int j = 0 ; j < m ; j++ ) dp[word1.size()][j] = (word2.size()-j);
+        for(int i = 0 ; i < m ; i++ ) nxt[i] = (word2.size()-i);
 
-        // for(int i = 0 ; i <= n ; i++ )
-        // {
-        //     for(int j = 0 ; j <= m ; j++ )
-        //     {
-        //         cout<<dp[i][j]<<" ";
-        //     }
-        //     cout<<endl;
-        // }
 
-        // cout<<endl;
-        // cout<<endl;
-
-        for(int i = (n-1) ; i >= 0 ; i-- )
+        for(int i = n ; i >= 0 ; i-- )
         {
-            for(int j = (m-1) ; j >= 0 ; j-- )
+            for(int j = m ; j >= 0 ; j-- )
             {
+                pres[word2.size()] = (word1.size()-i);
                 if(word1[i] == word2[j]) // Same Character
                 {
-                    dp[i][j] = dp[i+1][j+1];
+                    pres[j] = nxt[j+1];
                 }
                 else
                 {
-                    dp[i][j] = (1 + min({dp[i+1][j+1],dp[i+1][j],dp[i][j+1]}));
+                    pres[j] = (1 + min({nxt[j+1],nxt[j],pres[j+1]}));
                 }
             }
+            nxt = pres;
         }
 
-        // for(int i = 0 ; i <= n ; i++ )
-        // {
-        //     for(int j = 0 ; j <= m ; j++ )
-        //     {
-        //         cout<<dp[i][j]<<" ";
-        //     }
-        //     cout<<endl;
-        // }
-
-        return dp[0][0];
+        for(auto it : pres)
+        {
+            cout<<it<<" ";
+        }
+        return nxt[0];
     }
 };
+
+// Now Optimise This code with the Space Optimization
