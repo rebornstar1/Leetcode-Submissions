@@ -1,7 +1,7 @@
 class Solution {
 public:
     int subarraysDivByK(vector<int>& nums, int k) {
-        map<int,int>mp;
+        unordered_map<int,int>mp;
         int val = 0;
         int ans = 0;
         mp[0] = 1;
@@ -20,7 +20,8 @@ public:
                 mp[jump%k]++;
             }
         }
-        cout<<(-5)%5<<endl;
         return ans;
     }
 };
+
+// Optimise This Code In terms of Time Complexity
