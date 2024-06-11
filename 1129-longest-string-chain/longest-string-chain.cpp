@@ -49,6 +49,10 @@ public:
                    cout<<i<<" "<<j<<endl;
                    dp[i] = max(dp[j]+1,dp[i]);
                 }
+                else if(words[i].size() > (words[j].size()+1))
+                {
+                    break;
+                }
             }
             ans = max(ans,dp[i]);
         }
@@ -56,4 +60,4 @@ public:
     }
 };
 
-// First Try Out the DP Approach to this question O(N^2) Solution
+// Very Much Needed To Optimise This Code
