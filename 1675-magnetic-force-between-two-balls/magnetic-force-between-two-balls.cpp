@@ -3,21 +3,17 @@ public:
     bool check(vector<int> &position,int md,int m)
     {
         int temp = position[0];
-        int val = 1;
-        while(val <= m)
+        int cnt = 1;
+        // Directly Try Only one for loop
+        for(int i = 1 ; i < position.size() ; i++ )
         {
-            auto it = lower_bound(position.begin(),position.end(),md+temp);
-            if(it != position.end())
+            if((position[i]-temp) >= md)
             {
-                val++;
-                temp = *it;
-            }
-            else
-            {
-               break;
+               cnt++;
+               temp = position[i];
             }
         }
-        return val >= m;
+        return cnt >= m;
     }
 
     int maxDistance(vector<int>& position, int m) {
@@ -38,6 +34,8 @@ public:
                e = (md-1);
             }
         }
+
+        // O(NlogN) + O(log(10^9)*(10^5)*log(10^5));
 
         if(check(position,e,m))
         {
