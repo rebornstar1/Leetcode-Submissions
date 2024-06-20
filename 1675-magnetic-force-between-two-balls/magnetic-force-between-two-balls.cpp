@@ -21,7 +21,7 @@ public:
         int n = position.size();
         sort(position.begin(),position.end());
         // This seems of Binary Search
-        int s = 1 , e = 1e9, md;
+        int s = 1 , e = (position[n-1]-position[0]), md;
         while((e-s)>1)
         {
             int md = (s+e)/2;
@@ -35,8 +35,6 @@ public:
             }
         }
 
-        // O(NlogN) + O(log(10^9)*(10^5)*log(10^5));
-
         if(check(position,e,m))
         {
             return e;
@@ -48,4 +46,4 @@ public:
     }
 };
 
-// Reduce the Time & Space Complexity Now
+// Check If It can be more optimised or not
