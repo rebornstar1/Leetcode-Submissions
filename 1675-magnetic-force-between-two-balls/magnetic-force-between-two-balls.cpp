@@ -1,13 +1,13 @@
 class Solution {
 public:
-    bool check(multiset<int> &qst,int md,int m)
+    bool check(vector<int> &position,int md,int m)
     {
-        int temp = *(qst.begin());
+        int temp = position[0];
         int val = 1;
         while(val <= m)
         {
-            auto it = qst.lower_bound(md+temp);
-            if(it != qst.end())
+            auto it = lower_bound(position.begin(),position.end(),md+temp);
+            if(it != position.end())
             {
                 val++;
                 temp = *it;
@@ -24,17 +24,12 @@ public:
 
         int n = position.size();
         sort(position.begin(),position.end());
-        multiset<int>qst;
-        for(int i = 0 ; i < n ; i++ )
-        {
-            qst.insert(position[i]);
-        }
         // This seems of Binary Search
         int s = 1 , e = 1e9, md;
         while((e-s)>1)
         {
             int md = (s+e)/2;
-            if(check(qst,md,m))
+            if(check(position,md,m))
             {
                s = md;
             }
@@ -44,7 +39,7 @@ public:
             }
         }
 
-        if(check(qst,e,m))
+        if(check(position,e,m))
         {
             return e;
         }
