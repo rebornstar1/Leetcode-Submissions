@@ -20,10 +20,11 @@ public:
              prev++;
            }
            int temp = test.size();
-           cout<<temp<<" "<<ind<<endl;
            ans = max(ans,temp);
            ind++;
         }
         return ans;
     }
 };
+
+// Now Make THIS Solution Optimal and learn some new approaches
