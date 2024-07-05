@@ -1,49 +1,37 @@
 class Solution {
 public:
-    bool checkPalindrome(string s)
+    bool checkPalindrome(string &s,int i,int j)
     {
-        int n = s.size();
-        for(int i = 0 ; i < n ; i++ )
-        {
-            if(s[i]!=s[n-i-1])
-            {
-                return false;
-            }
+        while (i < j) {
+        if (s[i] != s[j]) return false;
+        i++;
+        j--;
         }
         return true;
     }
 
-    int Partition(string s,int ind,vector<int>&dp)
+    int cntCut(string &s,int i,vector<int>&dp)
     {
-        if(ind == s.size())
+        if(i == s.size() ) return 0;
+        if(dp[i] != -1) return dp[i];
+
+        int mini = INT_MAX;
+        for(int k = i ; k < s.size() ; k++ )
         {
-            return 0;
-        }
-        if(dp[ind] != -1)
-        {
-            return dp[ind];
-        }
-        int val = INT_MAX;
-        for(int i = (s.size()-1) ; i >= ind ; i-- )
-        {
-            if(checkPalindrome(s.substr(ind,i-ind+1)))
+            if(checkPalindrome(s,i,k))
             {
-                int temp = (1+Partition(s,i+1,dp));
-                if(temp > val)
-                {
-                    break;
-                }
-                val = temp;
-               // val = min(1+Partition(s,i+1,dp),val);
+                int val = (1+cntCut(s,k+1,dp));
+                mini = min(val,mini);
             }
         }
-        return dp[ind] = val;
+        return dp[i] = mini;
     }
-
 
     int minCut(string s) {
-        int cnt = 0;
-        vector<int>dp(s.size()+1,-1);
-        return Partition(s,0,dp)-1;
+        int n = s.size();
+        vector<int>dp(n+1,-1);
+        return cntCut(s,0,dp)-1;
     }
 };
+
+// Recursion is correct but we need to care about the time commplexity
