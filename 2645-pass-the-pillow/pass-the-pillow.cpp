@@ -1,26 +1,17 @@
 class Solution {
 public:
     int passThePillow(int n, int time) {
-        vector<int>temp;
-        for(int i = 1 ; i <= n ; i++ )
+        time++;
+        int op = (2*n-2);
+        int flag = 0;
+        if(time%op == 0) flag = 1;
+        time = time%op;
+        if(flag == 1) time+=op;
+        if(time <= n )
         {
-            temp.push_back(i);
+            return time;
         }
-        for(int i = (n-1) ; i > 1 ; i-- )
-        {
-            temp.push_back(i);
-        }
-
-        int flex = temp.size();
-        int ind = 0;
-        int cnt = 0;
-        while(cnt != time)
-        {
-            ind++;
-            cnt++;
-            ind%=flex;
-        }
-        return temp[ind];
+        return 2*n - time;
     }
 };
 
