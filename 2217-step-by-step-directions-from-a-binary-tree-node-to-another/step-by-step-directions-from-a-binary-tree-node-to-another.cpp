@@ -28,8 +28,7 @@ public:
         {
             return temp2;
         }
-        int num = s.size();
-        s = s.substr(0,num-1);
+        s.pop_back();
         return "test";
     }
 
@@ -56,3 +55,5 @@ public:
         return ans;
     }
 };
+
+// Check how to optimise this more
