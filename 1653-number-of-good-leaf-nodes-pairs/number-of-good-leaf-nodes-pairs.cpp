@@ -13,7 +13,7 @@ class Solution {
 private:
      vector<string>temp;
 public:
-    void dfs(TreeNode* root,string check)
+    void dfs(TreeNode* root,string &check)
     {
         if(root == NULL) return;
         if(root->left == NULL && root->right == NULL)
@@ -27,6 +27,7 @@ public:
         check.pop_back();
         check.push_back('R');
         dfs(root->right,check);
+        check.pop_back();
     }
 
     // Now Use the String PushBack;
@@ -47,7 +48,8 @@ public:
     }
 
     int countPairs(TreeNode* root, int distance) {
-        dfs(root,"");
+        string flex;
+        dfs(root,flex);
          int ans = 0;
          for(int i = 0 ; i < temp.size() ; i++ )
          {
