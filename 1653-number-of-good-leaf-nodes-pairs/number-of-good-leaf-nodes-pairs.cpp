@@ -22,9 +22,14 @@ public:
             return;
         }
 
-        dfs(root->left,check+'L');
-        dfs(root->right,check+'R');
+        check.push_back('L');
+        dfs(root->left,check);
+        check.pop_back();
+        check.push_back('R');
+        dfs(root->right,check);
     }
+
+    // Now Use the String PushBack;
 
     bool check(string s,string p,int distance)
     {
