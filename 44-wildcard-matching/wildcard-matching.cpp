@@ -1,45 +1,54 @@
 class Solution {
 public:
-    bool defineMatch(string &s,string &p,int i,int j,vector<vector<int>>&dp)
+    bool solve(string &A,string &B,int i,int j,vector<vector<int>>&dp)
     {
-        if(i == s.size() && j == p.size())
+        // Base Case
+        if(i == A.size() && j == B.size())
         {
             return true;
         }
-
-        if(i > s.size() || j > p.size())
-        {
-            return false;
-        }
-
+        
         if(dp[i][j] != -1)
         {
-            return dp[i][j] == 0 ? false : true ;
+            return dp[i][j];
         }
-
-        if(p[j] == '*')
+        
+        bool ans = false;
+        if(i!=A.size() && j!=B.size() && A[i] == B[j])
         {
-           return dp[i][j] = (defineMatch(s,p,i,j+1,dp)|defineMatch(s,p,i+1,j+1,dp)|defineMatch(s,p,i+1,j,dp));
+            ans |= solve(A,B,i+1,j+1,dp);
         }
-        else if(p[j] == '?')
+        else if(B[j] == '?')
         {
-           return dp[i][j] = (defineMatch(s,p,i+1,j+1,dp));
+            if(i == A.size())
+            {
+                return false;
+            }
+            else
+            {
+            ans |= solve(A,B,i+1,j+1,dp);
+            }
         }
-        else
+        else if(B[j] == '*')
         {
-           if(s[i] != p[j]) return false;
-           return dp[i][j] = defineMatch(s,p,i+1,j+1,dp);
+            if(i == A.size())
+            {
+                ans |= solve(A,B,i,j+1,dp);
+            }
+            else
+            {
+                ans |= (solve(A,B,i,j+1,dp)|solve(A,B,i+1,j+1,dp)|solve(A,B,i+1,j,dp));   
+            }
         }
-
-        return false;
+        return dp[i][j] = ans;
     }
 
     bool isMatch(string s, string p) {
-        // Apply DP for this code
-        // -1 for unvisited 0 for false and 1 for true;
         int n = s.size();
         int m = p.size();
-        vector<vector<int>>dp(n+1,vector<int>(m+1,-1));
-        return defineMatch(s,p,0,0,dp);
+        vector<vector<int>>dp(n+5,vector<int>(m+5,-1));
+        return solve(s,p,0,0,dp);
     }
 };
+
+// Try for it's Tabulation Solution
