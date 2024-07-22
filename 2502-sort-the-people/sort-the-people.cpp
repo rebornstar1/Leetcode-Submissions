@@ -9,13 +9,12 @@ public:
         }
 
         //names.clear();
-        int flip = 0;
+        int flip = (n-1);
         for(auto it : mp)
         {
             names[flip] = it.second;
-            flip++;
+            flip--;
         }
-        reverse(names.begin(),names.end());
         return names;
     }
 };
