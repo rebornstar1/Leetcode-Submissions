@@ -1,7 +1,7 @@
 class Solution {
 public:
     bool canBeEqual(vector<int>& target, vector<int>& arr) {
-        unordered_map<int,int>mp;
+        vector<int>mp(1001, 0);
         int n = target.size();
         for(int i = 0 ; i < n ; i++ )
         {
@@ -11,10 +11,8 @@ public:
 
         for(auto it : mp)
         {
-            if(it.second != 0) return false;
+            if(it != 0) return false;
         }
         return true;
     }
 };
-
-// This is O(NlogN) Aprroach
