@@ -20,16 +20,9 @@ public:
 
         sort(order.begin(),order.end());
         long long ans = 0;
-        for(int i = 0 ; i < order.size() ; i++ )
+        for(int i = (left-1) ; i <= (right-1) ; i++ )
         {
-            if(i>=(left-1) && i<=(right-1))
-            {
-                ans = (ans+order[i])%1000000007;
-            }
-            else if(i > (right-1))
-            {
-                break;
-            }
+           ans = (ans+order[i])%1000000007;
         }
         return ans;
     }
