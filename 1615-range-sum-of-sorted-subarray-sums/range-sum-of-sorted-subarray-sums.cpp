@@ -26,9 +26,13 @@ public:
             {
                 ans = (ans+order[i])%1000000007;
             }
+            else if(i > (right-1))
+            {
+                break;
+            }
         }
         return ans;
     }
 };
 
-// First I'm Gonna Write the naive approach
+// This O(N^2 + N^2*log(N^2))
