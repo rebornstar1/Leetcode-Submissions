@@ -4,7 +4,6 @@ private:
 public:
     int findMaxForm(vector<string>& strs, int m, int n) {
         vector<pair<int,int>>vp;
-        vector<vector<vector<int>>>dp(strs.size()+1,vector<vector<int>>(m+1,vector<int>(n+1,0)));
         int N = strs.size();
 
         // Counting of 1's and 0's
@@ -26,7 +25,8 @@ public:
         }
         
         // Tabulation Solution for this Approach
-        dp[0][0][0] = 0;
+        vector<vector<int>>prev(m+1,vector<int>(n+1,0));
+        vector<vector<int>>curr(m+1,vector<int>(n+1,0));
 
         for(int i = 1 ; i <= vp.size() ; i++ )
         {
@@ -34,16 +34,17 @@ public:
             {
                 for(int k = 0 ; k <= n ; k++ )
                 {
-                    dp[i][j][k] = max(dp[i][j][k],dp[i-1][j][k]);
+                    curr[j][k] = max(curr[j][k],prev[j][k]);
 
                     if((j-vp[i-1].first) >= 0 && (k-vp[i-1].second) >= 0)
                     {
-                        dp[i][j][k] = max(dp[i][j][k],1+dp[i-1][j-vp[i-1].first][k-vp[i-1].second]);
+                        curr[j][k] = max(curr[j][k],1+prev[j-vp[i-1].first][k-vp[i-1].second]);
                     }
 
-                    ans = max(ans,dp[i][j][k]);
+                    ans = max(ans,curr[j][k]);
                 }
             }
+            prev = curr;
         }
         return ans;
     }
