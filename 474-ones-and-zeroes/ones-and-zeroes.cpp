@@ -2,24 +2,9 @@ class Solution {
 private:
     int ans = 0;
 public:
-    int solve(vector<pair<int,int>>&vp, int m, int n, int a, int b, int ind,vector<vector<vector<int>>>&dp)
-    {
-        if(ind == vp.size())
-        {
-            return 0;
-        }
-
-        if(dp[ind][a][b] != -1)
-        {
-            return dp[ind][a][b];
-        }
-
-        return dp[ind][a][b] = max(solve(vp,m,n,a,b,ind+1,dp),(m>=(a+vp[ind].first) && n>=(b+vp[ind].second)) ? 1+solve(vp,m,n,a+vp[ind].first,b+vp[ind].second,ind+1,dp) : 0);
-    }
-
     int findMaxForm(vector<string>& strs, int m, int n) {
         vector<pair<int,int>>vp;
-        vector<vector<vector<int>>>dp(601,vector<vector<int>>(101,vector<int>(101,0)));
+        vector<vector<vector<int>>>dp(strs.size()+1,vector<vector<int>>(m+1,vector<int>(n+1,0)));
         int N = strs.size();
 
         // Counting of 1's and 0's
@@ -60,10 +45,9 @@ public:
                 }
             }
         }
-
         return ans;
     }
 };
 
 
-// Write The Tabulation Approach for this
+// Try Space Optimization in this question
