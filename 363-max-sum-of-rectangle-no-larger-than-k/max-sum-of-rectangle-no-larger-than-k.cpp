@@ -46,6 +46,7 @@ public:
                        {
                           ans = max(ans,val);
                        }
+                       if(ans == w) return ans;
                     }
                 }
             }
@@ -53,3 +54,5 @@ public:
         return ans;
     }
 };
+
+// Solve This Question Optimally
