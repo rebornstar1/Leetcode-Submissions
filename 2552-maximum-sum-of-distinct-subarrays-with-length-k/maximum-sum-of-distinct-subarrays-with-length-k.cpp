@@ -2,7 +2,7 @@ class Solution {
 public:
     long long maximumSubarraySum(vector<int>& nums, int k) {
         int n = nums.size();
-        unordered_map<long long,long long>mp; // To Keep the Count of Numbers in the array
+        unordered_map<int,int>mp; // To Keep the Count of Numbers in the array
         long long sum = INT_MIN, ind = 0, curr = 0;
         for(int i = 0 ; i < n ; i++ )
         {
@@ -21,8 +21,6 @@ public:
             curr += nums[i];
             ind++;
             mp[nums[i]]++;
-
-            cout<<curr<<" "<<ind<<endl;
             
             if(ind == k)
             {
