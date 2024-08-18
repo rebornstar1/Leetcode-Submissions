@@ -9,18 +9,18 @@
  */
 class Solution {
 public:
-    bool check(TreeNode* root,TreeNode* p)
-    {
-        if(root == NULL) return false;
-        if(root == p) return true;
-
-        return check(root->left,p)|check(root->right,p);
-    }
-
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
         
-        if(check(root->left,p)&check(root->left,q)) return lowestCommonAncestor(root->left,p,q);
-        if(check(root->right,p)&check(root->right,q)) return lowestCommonAncestor(root->right,p,q);
+        if(root == NULL || root == p || root == q) return root;
+        if((root->left == p && root->right == q) || (root->left == q && root->right == p)) return root;
+
+        TreeNode* one = lowestCommonAncestor(root->right,p,q);
+        TreeNode* two = lowestCommonAncestor(root->left,p,q);
+
+        if(one == NULL) return two;
+        if(two == NULL) return one;
         return root;
     }
 };
+
+// Try To Optimise This code in terms of Time Complexity and Recursive Calls
