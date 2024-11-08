@@ -1,7 +1,6 @@
 class Solution {
 public:
     vector<int> getMaximumXor(vector<int>& nums, int maximumBit) {
-       vector<int>ans;
        int val = 0, n = nums.size();
        for(int i = 0 ; i < n ; i++ )
        {
@@ -17,9 +16,14 @@ public:
        
        for(int i = (n-1) ; i >= 0 ; i-- )
        {
-          ans.push_back(val^max_num);
-          val ^= nums[i];
+          int temp = nums[i];
+          nums[i] = (val^max_num);
+          // ans.push_back(val^max_num);
+          val ^= temp;
        }
-       return ans;
+       reverse(nums.begin(),nums.end());
+       return nums; 
     }
 };
+
+// Let's Optimise This code more
