@@ -1,23 +1,29 @@
 class Solution {
 public:
     long long pickGifts(vector<int>& gifts, int k) {
-        // The Bruteforce Approach => each time sort and considering the last element and 
-        // adding it's square into this
-        // It's Time Complexity is around O(N*log(N)*K)
-
-        // size of the gifts
+        priority_queue<int>pq;
         int n = gifts.size();
-        while(k--)
-        {
-            sort(gifts.begin(),gifts.end());
-            gifts[n-1] = sqrt(gifts[n-1]);
-        }
-
-        long long sum = 0;
         for(int i = 0 ; i < n ; i++ )
         {
-            sum += gifts[i];
+            pq.push(gifts[i]);
         }
-        return sum;
+
+        while(k--)
+        {
+            int num = pq.top();
+            pq.pop();
+            pq.push(sqrt(num));
+        }
+
+        long long ans = 0;
+        while(!pq.empty())
+        {
+            long long val = pq.top();
+            ans += val;
+            pq.pop();
+        }
+        return ans;
     }
 };
+
+// Now Let's come to more better solution which could be of the Priority Queue
