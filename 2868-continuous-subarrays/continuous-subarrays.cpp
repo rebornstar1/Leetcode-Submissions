@@ -24,7 +24,6 @@ public:
                 int compSize = st.size();
                 if(mp[curr] == 0)
                 {
-               // cout<<compSize<<" "<<prev<<" "<<curr<<endl;
                 ans += compSize;
                 } 
                 mp[curr]++;
