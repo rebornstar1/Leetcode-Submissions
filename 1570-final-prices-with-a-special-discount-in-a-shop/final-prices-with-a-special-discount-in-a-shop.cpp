@@ -2,7 +2,6 @@ class Solution {
 public:
     vector<int> finalPrices(vector<int>& prices) {
         int N = prices.size();
-        vector<int>final_price;
         for(int i = 0 ; i < N ; i++)
         {
             int discount = 0;
@@ -14,8 +13,8 @@ public:
                     break;
                 }
             }
-            final_price.push_back(prices[i] - discount);
+            prices[i] -= discount;
         }
-        return final_price;
+        return prices;
     }
 };
