@@ -26,10 +26,6 @@ public:
                 i--;
             }
 
-            
-
-            cout<<"text"<<endl;
-
             while(count[j] != 0 && count[i] != 0)
             {
                 for(int k = 0 ; k < min(count[j],repeatLimit) ; k++ ) ans += ('a'+j);
