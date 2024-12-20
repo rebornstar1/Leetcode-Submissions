@@ -23,13 +23,13 @@ public:
             if(level%2 == 1)
             {
                 int N = qst.size();
-                int ind = 0;
+                int ind = temp.size()-1;
                 while(N--)
                 {
                     TreeNode* node = qst.front();
                     qst.pop();
                     node->val = temp[ind];
-                    ind++;
+                    ind--;
                     if(node->left != NULL)
                     {
                         qst.push(node->left);
@@ -46,7 +46,6 @@ public:
                 {
                     TreeNode* node = qst.front();
                     qst.pop();
-                    // temp.push_back(node->val);
                     if(node->left != NULL)
                     {
                         temp.push_back(node->left->val);
@@ -55,9 +54,8 @@ public:
                         qst.push(node->right);
                     }
                 }
-                reverse(temp.begin(),temp.end());
-                for(int i = 0 ; i < temp.size() ; i++ ) cout<<temp[i]<<" ";
-                cout<<endl;
+                // reverse(temp.begin(),temp.end());
+               
                 level++;
             }
         }
