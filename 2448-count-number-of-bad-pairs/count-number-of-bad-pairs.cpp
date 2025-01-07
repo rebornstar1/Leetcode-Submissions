@@ -11,13 +11,8 @@ public:
         long long ans = 0;
         for(auto it : mp)
         {
-            cout<<it.first<<" "<<it.second<<endl;
             ans += ((n-it.second)*it.second);
         }
         return ans/2;
     }
 };
-
-// nums[i]-i = nums[j]-j
-// 4 0 1 0 
-// it.second * 
