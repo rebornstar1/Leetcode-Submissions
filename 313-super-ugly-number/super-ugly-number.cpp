@@ -18,7 +18,7 @@ public:
            for(int i = 0 ; i < primes.size() ; i++ )
            {
                long long flex = (num*primes[i]);
-               if(flex <= INT_MAX && !(pq.size() > n && flex > val))
+               if(flex <= INT_MAX && !(pq.size() > (n-cnt) && flex > val))
                {
                    if(mp[num*primes[i]] == 0)
                     {
