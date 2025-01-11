@@ -29,3 +29,6 @@ public:
         return num;
     }
 };
+
+
+// Check If there any optimal Solution exist
