@@ -1,7 +1,8 @@
 class Solution {
 public:
     bool isZeroArray(vector<int>& nums, vector<vector<int>>& queries) {
-        vector<int>calc(1e5+5,0);
+        int n = nums.size();
+        vector<int>calc(n+5,0);
         int q = queries.size();
         for(int i = 0 ; i < q ; i++ )
         {
