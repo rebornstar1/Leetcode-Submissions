@@ -29,11 +29,8 @@ public:
 
     int maxProfit(vector<int>& prices) {
         int n = prices.size();
-        vector<vector<int>>dp(n+1,vector<int>(5,-1));
-        return evaluate(0,1,prices,dp); // (index,isBuy,prices)
-        // isBuy 0 (Sellable)
-        // isBuy 1 (Buyable)
-        // isBuy 2 (Cooldown)
+        vector<vector<int>>dp(n+1,vector<int>(3,-1));
+        return evaluate(0,1,prices,dp);
     }
 };
 
