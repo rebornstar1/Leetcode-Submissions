@@ -2,8 +2,8 @@ class Solution {
 public:
     int maxProfit(int k, vector<int>& prices) {
         int n = prices.size();
-        vector<vector<int>>curr(3,vector<int>(n+5,0));
-        vector<vector<int>>prev(3,vector<int>(n+5,0));
+        vector<vector<int>>curr(2,vector<int>(n+1,0));
+        vector<vector<int>>prev(2,vector<int>(n+1,0));
 
         for(int i = 1 ; i <= k ; i++ )
         {
@@ -26,8 +26,7 @@ public:
             prev = curr;
         }
 
-        // I guess we can implement like dp[i] => curr and dp[i-1] => prev
-
+        // Think of If you can further optimise this solution, even after the space optimization
         return curr[1][0];
     }
 
