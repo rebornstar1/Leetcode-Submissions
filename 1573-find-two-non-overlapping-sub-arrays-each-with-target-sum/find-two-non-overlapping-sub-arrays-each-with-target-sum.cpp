@@ -2,34 +2,43 @@ class Solution {
 public:
     int minSumOfLengths(vector<int>& arr, int target) {
         int n = arr.size();
+        vector<int> minLen(n, INT_MAX);
 
-        unordered_map<int,int>mp;
-        mp[0] = 1;
-        mp[arr[0]] = 2;
-        for(int i = 1 ; i < n ; i++ )
-        {
-           arr[i] += arr[i-1];
-           mp[arr[i]] = (i+2);
-        } 
-        
-        int temp = (n+5), ans = INT_MAX; // impossible value
-        for(int i = 0 ; i < n ; i++ )
-        {
-            if(i > 0 && mp.find(arr[i-1]+target) != mp.end() && mp[arr[i-1]+target] != 0)
-            {
-                ans = min(ans,temp+mp[arr[i-1]+target]-1-i);
+        // 1. First pass (left to right): Track min length ending at or before i
+        int left = 0, sum = 0, best = INT_MAX;
+        for (int right = 0; right < n; ++right) {
+            sum += arr[right];
+
+            while (sum > target) sum -= arr[left++];
+
+            if (sum == target) {
+                int len = right - left + 1;
+                best = min(best, len);
+                minLen[right] = len;
             }
 
-            // and now update the ending one here
-            if(mp.find(arr[i]-target) != mp.end() && mp[arr[i]-target] != 0)
-            {
-                temp = min(temp,mp[arr[i]]-mp[arr[i]-target]);
+            if (right > 0)
+                minLen[right] = min(minLen[right], minLen[right - 1]);
+        }
+
+        // 2. Second pass (right to left): Try to combine with left
+        int res = INT_MAX;
+        left = n - 1;
+        sum = 0;
+        best = INT_MAX;
+
+        for (int right = n - 1; right >= 0; --right) {
+            sum += arr[right];
+
+            while (sum > target) sum -= arr[left--];
+
+            if (sum == target) {
+                int len = left - right + 1;
+                if (right > 0 && minLen[right - 1] != INT_MAX)
+                    res = min(res, len + minLen[right - 1]);
             }
         }
 
-        if(ans > n) return -1;
-        return ans;
+        return res == INT_MAX ? -1 : res;
     }
 };
-
-// Think if you can optimize this solution further
