@@ -18,7 +18,7 @@ public:
         
         for(int i = 0 ; i < n ; i++ )
         {
-            if(mp[arr[i]-target] != 0)
+            if(mp.find(arr[i]-target) != mp.end() && mp[arr[i]-target] != 0)
             {
                 lastk[i] = (mp[arr[i]]-mp[arr[i]-target]);
             }
@@ -26,7 +26,7 @@ public:
 
         for(int i = 0 ; i < n ; i++ )
         {
-            if(mp[arr[i]+target] != 0)
+            if(mp.find(arr[i]+target) != mp.end() && mp[arr[i]+target] != 0)
             {
                 firstk[i+1] = (-mp[arr[i]]+mp[arr[i]+target]);
             }
