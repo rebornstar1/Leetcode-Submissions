@@ -49,15 +49,7 @@ public:
              ans = min(ans,lastk[i]+firstk[i+1]);
         }
 
-        for(int i = 0 ; i < n ; i++ ) cout<<lastk[i]<<" ";
-        cout<<endl;
-        for(int i = 0 ; i < n ; i++ ) cout<<firstk[i]<<" ";
-
         if(ans > n) return -1;
         return ans;
-
-        
-
-        return 0;
     }
 };
