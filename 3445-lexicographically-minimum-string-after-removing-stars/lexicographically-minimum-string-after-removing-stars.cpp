@@ -42,3 +42,8 @@ public:
         return ans;
     }
 };
+
+// Directly come up with two variables and solve by that approach itself by reset them at every *
+// itself respectively here in
+
+// Try to Come Up with somewhat optimized Solution
