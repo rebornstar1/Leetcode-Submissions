@@ -16,26 +16,15 @@ public:
 
        for(int i = cnt ; i < (10*cnt) ; i++ )
        {
-           vector<int>flex;
            int val = i;
-           if(val <= n) flex.push_back(val);
-           while(val%10 == 0)
-           {
-              val /= 10;
-              if(val <= n) flex.push_back(val);
-           }
+           while(val%10 == 0) val/=10;
 
-           int flexsize = flex.size();
-           for(int j = (flexsize-1) ; j >= 0 ; j-- )
+           while(val <= i)
            {
-              ans.push_back(flex[j]);
+              if(val <= n ) ans.push_back(val);
+              val *= 10;
            }
        }
        return ans;
     }
 };
-
-// I may try a recursive loop in which I'll prioritly take values in the each digits order itself
-// To Be Implemented As soon as I'm up with the Codeforces Contest Now
-
-// Write Algorithm That Runs in O(N) Run Time and O(1) extra space
