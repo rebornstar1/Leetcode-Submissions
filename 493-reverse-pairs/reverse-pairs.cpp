@@ -58,7 +58,6 @@ public:
     int reversePairs(vector<int>& nums) {
         int n = nums.size();
         mergeSort(0,n-1,nums);
-        for(int i = 0 ; i < n ; i++ ) cout<<nums[i]<<" ";
         return ans;
     }
 };
