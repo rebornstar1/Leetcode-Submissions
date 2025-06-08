@@ -1,17 +1,13 @@
 class Solution {
 public:
     vector<int> lexicalOrder(int n) {
-        // Naive Approach
        vector<int>ans;
-
-       // find number of digits in n
        int temp = n, cnt = 1;
        while(temp != 0)
        {
           temp /= 10;
           cnt *= 10;
        }
-
        cnt/=10;
 
        for(int i = cnt ; i < (10*cnt) ; i++ )
