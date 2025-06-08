@@ -2,17 +2,34 @@ class Solution {
 public:
     vector<int> lexicalOrder(int n) {
         // Naive Approach
-       vector<string>vect;
-       for(int i = 1 ; i <= n ; i++ )
-       {
-          vect.push_back(to_string(i));
-       }      
-       sort(vect.begin(),vect.end());
-
        vector<int>ans;
-       for(int i = 0 ; i < vect.size() ; i++ )
+
+       // find number of digits in n
+       int temp = n, cnt = 1;
+       while(temp != 0)
        {
-           ans.push_back(stoi(vect[i]));
+          temp /= 10;
+          cnt *= 10;
+       }
+
+       cnt/=10;
+
+       for(int i = cnt ; i < (10*cnt) ; i++ )
+       {
+           vector<int>flex;
+           int val = i;
+           if(val <= n) flex.push_back(val);
+           while(val%10 == 0)
+           {
+              val /= 10;
+              if(val <= n) flex.push_back(val);
+           }
+
+           int flexsize = flex.size();
+           for(int j = (flexsize-1) ; j >= 0 ; j-- )
+           {
+              ans.push_back(flex[j]);
+           }
        }
        return ans;
     }
