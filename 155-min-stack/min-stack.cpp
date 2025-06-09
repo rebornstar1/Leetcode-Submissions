@@ -34,6 +34,8 @@ public:
     }
 };
 
+// Think of Any Optimal Solution which could exist for this itself
+
 /**
  * Your MinStack object will be instantiated and called as such:
  * MinStack* obj = new MinStack();
