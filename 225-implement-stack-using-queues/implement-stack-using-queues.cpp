@@ -1,49 +1,36 @@
 class MyStack {
 private:
-queue<int>a;
-queue<int>b;
-public:
-    MyStack() {
-        
-    }
-    
-    void push(int x) {
-        while(!b.empty())
-        {
-            a.push(b.front());
-            b.pop();
-        }
+    std::queue<int> a, b;
 
-        b.push(x);
-        while(!a.empty())
-        {
+public:
+    MyStack() {}
+
+    void push(int x) {
+        b.push(x);  // Push new element into empty queue b
+
+        // Move all elements from a to b
+        while (!a.empty()) {
             b.push(a.front());
             a.pop();
         }
+
+        // Swap a and b so that a always contains the stack order
+        std::swap(a, b);
     }
-    
+
     int pop() {
-        int val = b.front();
-        b.pop();
+        if (a.empty()) return -1; // Optional: handle underflow case
+        int val = a.front();
+        a.pop();
         return val;
     }
-    
+
     int top() {
-        return b.front();
+        if (a.empty()) return -1; // Optional: handle empty case
+        return a.front();
     }
-    
+
     bool empty() {
-        return b.empty();
+        return a.empty();
     }
 };
-
-/**
- * Your MyStack object will be instantiated and called as such:
- * MyStack* obj = new MyStack();
- * obj->push(x);
- * int param_2 = obj->pop();
- * int param_3 = obj->top();
- * bool param_4 = obj->empty();
- */
-
- // Implement Stack Using Queue
