@@ -1,46 +1,32 @@
 class MinStack {
 private:
-   stack<int> st1,st2;
+    stack<int> st;
+    stack<pair<int, int>> minSt; // {minValue, frequency}
 public:
-    MinStack() {
-        
-    }
-    
-    void push(int val) {
-        if(st1.size() == 0) 
-        {
-            st1.push(val);
-            st2.push(val);
-            return;
-        }
+    MinStack() {}
 
-        st1.push(val);
-        if(st2.top() >= val) st2.push(val);
+    void push(int val) {
+        st.push(val);
+        if(minSt.empty() || val < minSt.top().first)
+            minSt.push({val, 1});
+        else if(val == minSt.top().first)
+            minSt.top().second++; // Increase frequency
     }
-    
+
     void pop() {
-        int val = st1.top();
-        st1.pop();
-        if(st2.empty()) return;
-        if(val == st2.top()) st2.pop();
+        if(st.top() == minSt.top().first) {
+            minSt.top().second--;
+            if(minSt.top().second == 0)
+                minSt.pop();
+        }
+        st.pop();
     }
-    
+
     int top() {
-        return st1.top();
+        return st.top();
     }
-    
+
     int getMin() {
-        return st2.top();
+        return minSt.top().first;
     }
 };
-
-// Think of Any Optimal Solution which could exist for this itself
-
-/**
- * Your MinStack object will be instantiated and called as such:
- * MinStack* obj = new MinStack();
- * obj->push(val);
- * obj->pop();
- * int param_3 = obj->top();
- * int param_4 = obj->getMin();
- */
