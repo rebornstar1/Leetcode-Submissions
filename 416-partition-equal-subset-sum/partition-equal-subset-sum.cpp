@@ -3,11 +3,8 @@ public:
     bool func(int index,int target, vector<int>& nums, vector<vector<int>>&dp)
     {
         if(target < 0) return false;
-        if(index == nums.size()) 
-        {
-            if(target == 0) return true;
-            return false;
-        }
+        if(target == 0) return true;
+        if(index == nums.size()) return false;
 
         if(dp[index][target] != -1) return dp[index][target];
 
