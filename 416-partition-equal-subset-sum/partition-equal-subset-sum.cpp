@@ -1,27 +1,15 @@
 class Solution {
 public:
     bool canPartition(vector<int>& nums) {
-        int n = nums.size(), sum = 0;
-        for(int i = 0 ; i < n ; i++ ) sum += nums[i];
-        if(sum%2 == 1) return false;
-        vector<int>prev(sum/2+1,0);
-        vector<int>curr(sum/2+1,0);
-
-        for(int i = 0 ; i <= n ; i++ ) prev[0] = 1;
-
-        for(int i = (n-1) ; i >= 0 ; i-- )
-        {
-            for(int j = 0 ; j <= (sum/2) ; j++ )
-            {
-                int val1 = ((j-nums[i]) >= 0 ? prev[j-nums[i]] : 0);
-                int val2 = prev[j];
-                curr[j] = (val1 | val2); 
-                if(curr[sum/2]) return true;
-            }
-            prev = curr;
+        int sum=accumulate(nums.begin(),nums.end(),0);
+        if(sum&1) return 0;
+        int k=sum/2;
+        bitset<10001>dp;
+        dp[k]=1;
+        for(int x:nums){
+            dp |= dp>>x;
+            if(dp[0]) return 1;
         }
-        return curr[sum/2];
+        return dp[0];
     }
 };
-
-// I want to Optimize this solution More
