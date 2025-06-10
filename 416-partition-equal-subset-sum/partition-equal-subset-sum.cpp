@@ -4,8 +4,6 @@ public:
         int n = nums.size(), sum = 0;
         for(int i = 0 ; i < n ; i++ ) sum += nums[i];
         if(sum%2 == 1) return false;
-        // vector<vector<int>>dp(n+1,vector<int>(sum/2+1,0));
-
         vector<int>prev(sum/2+1,0);
         vector<int>curr(sum/2+1,0);
 
@@ -18,6 +16,7 @@ public:
                 int val1 = ((j-nums[i]) >= 0 ? prev[j-nums[i]] : 0);
                 int val2 = prev[j];
                 curr[j] = (val1 | val2); 
+                if(curr[sum/2]) return true;
             }
             prev = curr;
         }
@@ -25,4 +24,4 @@ public:
     }
 };
 
-// Now use the space Optimization
+// I want to Optimize this solution More
