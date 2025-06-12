@@ -16,7 +16,7 @@ public:
     int findTargetSumWays(vector<int>& nums, int target) {
         int n = nums.size();
         int val = (1000*(n+1));
-        vector<vector<int>>dp(n+1,vector<int>(5000,-1));
+        vector<vector<int>>dp(n+1,vector<int>(4001,-1));
         return func(0,target,nums,dp);
     }
 };
