@@ -1,16 +1,24 @@
 class Solution {
 public:
     int change(int amount, vector<int>& coins) {
-        vector<int> dp(amount + 1, 0);
-        dp[0] = 1; // Base case: There is one way to make amount 0 (using no coins)
-
-        for (int coin : coins) {
-            for (int i = coin; i <= amount; ++i) {
-                dp[i] += dp[i - coin];
+        
+        int n = coins.size();
+        vector<unsigned int>dp(amount+1,0);
+        dp[0] = 1;
+        
+        for(int i = 0 ; i < n ; i++ )
+        {
+            for(int j = 0 ; j <= amount ; j++ )
+            {
+                if(dp[j] > 0 && ((j+coins[i]) <= amount))
+                {
+                    dp[j+coins[i]] += dp[j];
+                }
             }
         }
+
         return dp[amount];
     }
 };
 
-// This isn't the optimized code try for that one
+// we want the combinations for this
