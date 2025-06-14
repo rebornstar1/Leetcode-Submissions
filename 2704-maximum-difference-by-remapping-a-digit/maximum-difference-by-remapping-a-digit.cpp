@@ -11,9 +11,6 @@ public:
             if(temp%10 != 0) jump = (temp%10);
         }
 
-        cout<<flex<<" "<<jump<<endl;
-
-        // now we know left most number
         int firstConstruct = 0, firstTemp = 1;
         int secondConstruct = 0, secondTemp = 1;
         while(num)
@@ -36,8 +33,6 @@ public:
             secondTemp *= 10;
             num /= 10;
         }
-
-        cout<<firstConstruct<<" "<<secondConstruct<<endl;
 
         return (firstConstruct - secondConstruct);
     }
