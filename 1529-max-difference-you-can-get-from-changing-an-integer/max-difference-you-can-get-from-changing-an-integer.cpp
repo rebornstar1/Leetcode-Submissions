@@ -1,32 +1,80 @@
 class Solution {
 public:
     int maxDiff(int num) {
-        int sizeCheck = to_string(num).size();
-        int ans = INT_MIN;
-        for(int xi = 0 ; xi <= 9 ; xi++)
+        int x = -1, temp = num;
+        while(temp)
         {
-            for(int yi = 0 ; yi <= 9 ; yi++)
+            if((temp%10) != 9) x = temp%10;
+            temp /= 10;
+        }
+        
+        temp = num;
+        int y = -1, flag = 0;
+        while(temp)
+        {
+            if((temp%10) != 0) y = (temp%10);
+            temp /= 10;
+        }
+
+        if(y == 1)
+        {
+            y = -1;
+            temp = num;
+            flag = 1;
+            while(temp)
             {
-                for(int xj = 0 ; xj <= 9 ; xj++ )
-                {
-                    for(int yj = 0 ; yj <= 9 ; yj++ )
-                    {
-                        // first simplify a number and then b number
-                        string as = to_string(num);
-                        for(int i = 0 ; i < as.size() ; i++ ) if(as[i] == ('0'+xi)) as[i] = ('0'+yi);
-                        int a = stoi(as);
-
-                        string bs = to_string(num);
-                        for(int i = 0 ; i < bs.size() ; i++ ) if(bs[i] == ('0'+xj)) bs[i] = ('0'+yj);
-                        int b = stoi(bs);
-
-                        if(sizeCheck != to_string(a).size() || sizeCheck != to_string(b).size()) continue;
-
-                        if(a !=0 && b != 0) ans = max(ans,abs(a-b));
-                    }
-                }
+                if(temp%10!= 0 && temp%10 != 1) y = (temp%10);
+                temp /= 10;
             }
         }
-    return ans;
+
+        cout<<x<<" "<<y<<endl;
+
+        int a = num, b = num;
+
+        if(x != -1)
+        {
+            temp = num;
+            a = 0;
+            int fact = 1;
+            while(temp)
+            {
+                if(temp%10 == x)
+                {
+                    a = (a+ 9*fact);
+                }
+                else
+                {
+                    a = (a + fact*(temp%10));
+                }
+                temp /= 10;
+                fact *= 10;
+            }
+        }
+
+        if(y != -1)
+        {
+            temp = num;
+            b = 0;
+            int fact = 1;
+            while(temp)
+            {
+                if(temp%10 == y)
+                {
+                    if(flag) b = (b + 0*fact);
+                    else b = (b + 1*fact);
+                }
+                else
+                {
+                    b = (b + fact*(temp%10));
+                }
+                fact *= 10;
+                temp /= 10;
+            }
+        }
+
+        cout<<a<<" "<<b<<endl;
+
+        return (a-b);
     }
 };
