@@ -27,9 +27,6 @@ public:
                 temp /= 10;
             }
         }
-
-        cout<<x<<" "<<y<<endl;
-
         int a = num, b = num;
 
         if(x != -1)
@@ -72,9 +69,6 @@ public:
                 temp /= 10;
             }
         }
-
-        cout<<a<<" "<<b<<endl;
-
         return (a-b);
     }
 };
