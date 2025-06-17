@@ -7,7 +7,7 @@ public:
     {
         if(power == 0) return 1;
 
-        if(mp[power]) return mp[power];
+        if(mp.find(power) != mp.end() && mp[power]) return mp[power];
 
         if(power%2 == 0)
         {
