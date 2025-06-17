@@ -1,21 +1,24 @@
 class Solution {
 private:
     int M = 1000000007;
+    unordered_map<int,int>mp;
 public:
     int func(int num,int power)
     {
         if(power == 0) return 1;
 
+        if(mp[power]) return mp[power];
+
         if(power%2 == 0)
         {
             long long temp = func(num,power/2)%M;
-            return (temp*temp)%M;
+            return mp[power] = (temp*temp)%M;
         }
         else
         {
             long long temp = func(num,power/2)%M;
             long long val = (temp*num)%M;
-            return (temp*val)%M; 
+            return mp[power] = (temp*val)%M; 
         }
     }
 
