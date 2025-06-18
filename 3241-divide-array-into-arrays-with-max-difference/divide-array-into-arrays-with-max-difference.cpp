@@ -10,6 +10,10 @@ public:
             {
                 vect.push_back({nums[i],nums[i+1],nums[i+2]});
             }
+            else
+            {
+                return vector<vector<int>>{};
+            }
         }
 
         return (vect.size() == n/3 ? vect  : vector<vector<int>>{});
