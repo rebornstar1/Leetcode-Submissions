@@ -35,14 +35,6 @@ public:
             }
         }
         
-        // For this specific test case, the root's children might have special handling
-        if(rootIndex == 0) {
-            // If node 0 has two children with values 25 (from node 1) and 25 (from node 3)
-            // Then we don't need to increment anything
-            return cost[rootIndex];
-        }
-        
-        // Return value including this node's contribution
         return maxValue + cost[rootIndex];
     }
     
