@@ -3,27 +3,38 @@ public:
     vector<int> maxSubsequence(vector<int>& nums, int k) {
         
         int n = nums.size();
-        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>>pq;
+        priority_queue<int>pq;
 
-        for(int i = 0 ; i < n ; i++ )
+        for(int i = 0 ; i < n ; i++ ) pq.push(nums[i]);
+
+        int num = INT_MIN, freq = 0;
+        while(k--)
         {
-            pq.push({nums[i],i});
-            if(pq.size() > k) pq.pop();
-        }
+           if(num == pq.top())
+           {
+              freq++;
+           } 
+           else
+           {
+             num = pq.top();
+             freq = 1;
+           }
 
-        // order of the subsequence could be a possible issue in this
-        vector<vector<int>>tempans;
-        while(!pq.empty())
-        {
-            pair<int,int>temp = pq.top();
-            tempans.push_back({temp.second,temp.first});
-            pq.pop();
+           pq.pop();
         }
-
-        sort(tempans.begin(),tempans.end());
 
         vector<int>ans;
-        for(int i = 0 ; i < tempans.size() ; i++ ) ans.push_back(tempans[i][1]);
+        for(int i = 0 ; i < n ; i++ )
+        {
+            if(nums[i] > num) ans.push_back(nums[i]);
+            else if(nums[i] == num && freq > 0)
+            {
+               ans.push_back(nums[i]);
+               freq--;
+            }
+        }
         return ans;
     }
 };
+
+// The Space Complexity of the Solution Needs to be Reduced
