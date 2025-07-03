@@ -4,7 +4,7 @@ public:
         // findPow Of Two's
         set<int>powOfTwo;
         int temp = 1;
-        for(int i = 1 ; i < 30 ; i++ )
+        for(int i = 1 ; i < 11 ; i++ )
         {
             powOfTwo.insert(temp);
             temp *= 2;
@@ -14,7 +14,6 @@ public:
         dp[0] = 0;
         for(int i = 0 ; i <= k ; i++ )
         {
-           // use the upper bound in this
            auto it = powOfTwo.upper_bound(i);
            int tempVal = (*it);
 
