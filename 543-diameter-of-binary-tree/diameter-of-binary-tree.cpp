@@ -22,3 +22,5 @@ public:
         return max({height(root->left)+height(root->right),diameterOfBinaryTree(root->left),diameterOfBinaryTree(root->right)});
     }
 };
+
+// can we make this solution little more optimal ?
