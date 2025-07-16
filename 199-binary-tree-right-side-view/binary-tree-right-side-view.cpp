@@ -10,33 +10,29 @@
  * };
  */
 class Solution {
+private:
+    int max_height = -1;
 public:
-    vector<int> rightSideView(TreeNode* root) {
-        if(root == NULL) return {};
-        vector<int>ans;
-        queue<TreeNode*>qst;
-        qst.push(root);
-        while(!qst.empty())
-        {
-           int value = 1e6;
-           int n = qst.size();
-           for(int i = 0 ; i < n ; i++ )
-           {
-              TreeNode* temp = qst.front();
-              value = temp->val;
-              if(temp->left != NULL)
-              {
-                qst.push(temp->left);
-              }
+    void dfs(TreeNode* root, vector<int>&ans,int curr_height)
+    {
+        // base case
+        if(root == NULL) return;
 
-              if(temp->right != NULL)
-              {
-                qst.push(temp->right);
-              }
-              qst.pop();
-           }
-           ans.push_back(value);
+        if(curr_height > max_height )
+        {
+            ans.push_back(root->val);
+            max_height = curr_height;
         }
+
+        if(root->right != NULL) dfs(root->right,ans,curr_height+1);
+        if(root->left != NULL) dfs(root->left,ans,curr_height+1);
+        return;
+    }
+
+    vector<int> rightSideView(TreeNode* root) {
+        int curr_height = 0;
+        vector<int>ans;
+        dfs(root,ans,curr_height);
         return ans;
     }
 };
