@@ -10,43 +10,76 @@
  * };
  */
 class Solution {
-private:
-    map<int,vector<vector<int>>>mp;
-
 public:
+    void dfs(TreeNode* root, int &leftMost, int &rightMost, int i)
+    {
+        leftMost = min(leftMost,i);
+        rightMost = max(rightMost,i);
+
+        if(root->left != NULL) dfs(root->left,leftMost,rightMost,i-1);
+        if(root->right != NULL) dfs(root->right,leftMost,rightMost,i+1);
+        return;
+    }
+
+    int height(TreeNode* root)
+    {
+        if(root == NULL) return 0;
+        return 1+max(height(root->left),height(root->right));
+    }
+
     vector<vector<int>> verticalTraversal(TreeNode* root) {
-        vector<vector<int>>ans;
-        int check = 0;
-        
+        // apply dfs and find the left most and the right most for the root
+        int leftMost = 0, rightMost = 0;
+        int maxHeight = height(root);
+        dfs(root,leftMost,rightMost,0);
+        int root_count = 0;
+        root_count -= leftMost;
+
+        vector<vector<vector<int>>>ans(rightMost-leftMost+1,vector<vector<int>>(maxHeight+1));
         queue<pair<vector<int>,TreeNode*>>qst;
-        qst.push({{0,0},root});
+        qst.push({{root_count,0},root});
 
         while(!qst.empty())
         {
-            TreeNode* temp = qst.front().second;
-            int a = qst.front().first[0];
-            int hp = qst.front().first[1];
+            int r = qst.front().first[0];
+            int c = qst.front().first[1];
+            TreeNode* node = qst.front().second;
+            ans[r][c].push_back(node->val);
             qst.pop();
-            
-            mp[hp].push_back({a+1,temp->val}); 
-            
-            if(temp->left != NULL) qst.push({{a,hp-1},temp->left});
-            if(temp->right != NULL) qst.push({{a+1,hp+1},temp->right});
+
+            if(node->left != NULL)
+            {
+               qst.push({{r-1,c+1},node->left});
+            }
+
+            if(node->right != NULL)
+            {
+                qst.push({{r+1,c+1},node->right});
+            }
         }
 
-        for(auto it : mp)
+        for(int i = 0 ; i < ans.size() ; i++ )
         {
-            sort(it.second.begin(),it.second.end());
-            vector<int>check;
-            for(auto pp : it.second)
+            for(int j = 0 ; j < ans[i].size() ; j++ )
             {
-                check.push_back(pp[1]);
+                sort(ans[i][j].begin(),ans[i][j].end());
             }
-            ans.push_back(check);
-            
         }
-        return ans;
+
+        vector<vector<int>>flex;
+        for(int i = 0 ; i < ans.size() ; i++ )
+        {
+            vector<int>champ;
+            for(int j = 0 ; j < ans[i].size() ; j++ )
+            {
+                for(int k = 0 ; k < ans[i][j].size() ; k++ )
+                {
+                    champ.push_back(ans[i][j][k]);
+                }
+            }
+            flex.push_back(champ);
+        }
+
+        return flex;
     }
 };
-
-// First Write the map solution and then try to optimize it
