@@ -30,22 +30,26 @@ public:
 
         while(!pq.empty())
         {
-            int weight = pq.top().first;
-            int node = pq.top().second;
-            pq.pop();
-
-            if(Visited[node] == 1) continue;
-
-            Visited[node] = 1;
-            ans += weight;
-
-            for(vector<int> it : Adj[node])
+            int n = pq.size();
+            while(n--)
             {
-                if(Visited[it[0]] == 0) pq.push({it[1],it[0]});
+                int weight = pq.top().first;
+                int node = pq.top().second;
+                pq.pop();
+
+                if(Visited[node] == 1) continue;
+
+                Visited[node] = 1;
+                ans += weight;
+
+                for(vector<int> it : Adj[node])
+                {
+                    if(Visited[it[0]] == 0) pq.push({it[1],it[0]});
+                }
             }
         }
         return ans;
     }
 };
 
-// |xi-xj| + |yi-yj| and so find the |val| itself
+// see how can we optimize this solution
