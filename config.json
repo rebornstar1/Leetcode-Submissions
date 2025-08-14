@@ -1,0 +1,45 @@
+{
+  "facebook": {
+    "groups": [
+      {
+        "name": "Sample Group 1",
+        "url": "https://www.facebook.com/groups/samplegroup1",
+        "enabled": true,
+        "last_check": null,
+        "last_post_id": null
+      }
+    ],
+    "check_interval_minutes": 30,
+    "login_required": false,
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+  },
+  "twilio": {
+    "enabled": true,
+    "call_duration_seconds": 30,
+    "retry_attempts": 3,
+    "retry_delay_seconds": 60
+  },
+  "notifications": {
+    "enable_calls": true,
+    "enable_tts": true,
+    "call_message": "You have new Facebook group notifications. Please check your groups.",
+    "duplicate_prevention_hours": 1
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "logs/facebook_monitor.log",
+    "max_file_size_mb": 10,
+    "backup_count": 5,
+    "console_output": true
+  },
+  "scheduler": {
+    "enabled": true,
+    "run_on_startup": true,
+    "timezone": "UTC"
+  },
+  "state": {
+    "file": "data/state.json",
+    "backup_enabled": true,
+    "backup_interval_hours": 24
+  }
+}
