@@ -1,0 +1,33 @@
+# Facebook Group Notification to Call Automation Tool Dependencies
+
+# Web scraping and HTTP requests
+requests==2.31.0
+beautifulsoup4==4.12.2
+selenium==4.15.2
+
+# Twilio for phone calls
+twilio==8.12.0
+
+# Configuration and environment management
+python-dotenv==1.0.0
+
+# Data handling
+lxml==4.9.3
+
+# Scheduling
+schedule==1.2.0
+
+# Logging and utilities
+colorama==0.4.6
+
+# Web driver management for Selenium
+webdriver-manager==4.0.1
+
+# Text-to-speech for notifications
+pyttsx3==2.90
+
+# JSON handling (included in Python standard library)
+# datetime (included in Python standard library)
+# logging (included in Python standard library)
+# time (included in Python standard library)
+# os (included in Python standard library)
